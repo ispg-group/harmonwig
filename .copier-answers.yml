@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 2024.01.24
+_src_path: gh:scientific-python/cookie
+backend: flit
+email: daniel.hollas@bristol.ac.uk
+full_name: Daniel Hollas
+license: MIT
+org: ispg-group
+project_name: harmonwig
+project_short_description: Harmonic Wigner sampling from QM calculations.
+url: https://github.com/ispg-group/harmonwig
+vcs: false
