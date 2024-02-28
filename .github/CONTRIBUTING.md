@@ -3,29 +3,6 @@ description of best practices for developing scientific packages.
 
 [spc-dev-intro]: https://learn.scientific-python.org/development/
 
-# Quick development
-
-The fastest way to start with development is to use nox. If you don't have nox,
-you can use `pipx run nox` to run it without installing, or `pipx install nox`.
-If you don't have pipx (pip for applications), then you can install with
-`pip install pipx` (the only case were installing an application with regular
-pip is reasonable). If you use macOS, then pipx and nox are both in brew, use
-`brew install pipx nox`.
-
-To use, run `nox`. This will lint and test using every installed version of
-Python on your system, skipping ones that are not installed. You can also run
-specific jobs:
-
-```console
-$ nox -s lint  # Lint only
-$ nox -s tests  # Python tests
-$ nox -s docs -- --serve  # Build and serve the docs
-$ nox -s build  # Make an SDist and wheel
-```
-
-Nox handles everything for you, including setting up an temporary virtual
-environment for each run.
-
 # Setting up a development environment manually
 
 You can set up a development environment by running:
@@ -33,7 +10,7 @@ You can set up a development environment by running:
 ```bash
 python3 -m venv .venv
 source ./.venv/bin/activate
-pip install -v -e .[dev]
+pip install -e .[dev]
 ```
 
 If you have the
@@ -73,29 +50,3 @@ Use pytest-cov to generate coverage reports:
 ```bash
 pytest --cov=harmonwig
 ```
-
-# Building docs
-
-You can build the docs using:
-
-```bash
-nox -s docs
-```
-
-You can see a preview with:
-
-```bash
-nox -s docs -- --serve
-```
-
-# Pre-commit
-
-This project uses pre-commit for all style checking. While you can run it with
-nox, this is such an important tool that it deserves to be installed on its own.
-Install pre-commit and run:
-
-```bash
-pre-commit run -a
-```
-
-to check all files.

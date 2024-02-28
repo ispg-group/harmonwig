@@ -1,14 +1,13 @@
-name: CD
+name: Publish
 
 on:
-  workflow_dispatch:
+  release:
   pull_request:
   push:
     branches:
       - main
-  release:
-    types:
-      - published
+    tags:
+      - "v*"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -48,5 +47,4 @@ jobs:
         if: github.event_name == 'release' && github.event.action == 'published'
         with:
           # Remember to tell (test-)pypi about this repo before publishing
-          # Remove this line to publish to PyPI
           repository-url: https://test.pypi.org/legacy/
