@@ -1,2 +1,5 @@
+import harmonwig
+
+
 def test_dummy():
-    pass
+    print(harmonwig.__version__)
