@@ -32,11 +32,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install uv installer on Unix
+      - name: Install uv (Unix)
         if: runner.os != 'Windows'
         run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Install uv installer on Windows
+      - name: Install uv (Windows)
         if: runner.os == 'Windows'
         run: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
@@ -50,4 +50,3 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: ispg-group/harmonwig
