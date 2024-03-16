@@ -30,7 +30,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = []
+dependencies = ['ase', 'tdqm', 'cclib~=1.8.0']
 
 [project.scripts]
 harmonwig = 'harmonwig.__main__:main'
