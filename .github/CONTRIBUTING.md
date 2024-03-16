@@ -28,7 +28,8 @@ You should prepare pre-commit, which will help you by checking that commits pass
 required checks:
 
 ```bash
-pip install pre-commit # or brew install pre-commit on macOS
+pip install pipx
+pipx install pre-commit
 pre-commit install # Will install a pre-commit hook into the git repo
 ```
 
