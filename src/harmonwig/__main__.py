@@ -58,6 +58,7 @@ def parse_cmd():
 
     return parser.parse_args()
 
+
 def error(msg: str):
     import sys
 
@@ -91,10 +92,11 @@ def validate(parsed_obj) -> dict:
     req_keys = ["atomcoords", "atommasses", "vibdisps", "vibfreqs"]
     for key in req_keys:
         if key not in d:
-            msg = f"Could not find frequency data in the output file, missing key '{key}'"
+            msg = f"Incomplete frequency data in the output file, missing key '{key}'"
             error(msg)
     # TODO: We should return a custom dataclass instead of full cclib dictionary
     return d
+
 
 def main():
     """Entry point to the CLI app"""

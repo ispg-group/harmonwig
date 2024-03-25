@@ -15,6 +15,7 @@ ANG_TO_BOHR = 1.0 / 0.529177211
 
 __all__ = ["HarmonicWigner"]
 
+
 class HarmonicWigner:
     def __init__(
         self,
