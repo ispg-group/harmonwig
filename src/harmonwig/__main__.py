@@ -81,17 +81,20 @@ def read_qm_output(fname: str) -> dict:
 
     if parsed_obj is None:
         error("Could not read QM output file")
-    return parsed_obj.getattributes()
+    return validate(parsed_obj)
 
 
-def validate(out: dict):
-    if not out["optdone"]:
+def validate(parsed_obj) -> dict:
+    d = parsed_obj.getattributes()
+    if not d["optdone"]:
         error("Geometry optimization did not finish!")
     req_keys = ["atomcoords", "atommasses", "vibdisps", "vibfreqs"]
     for key in req_keys:
-        if key not in out:
-            # TODO: Make the error message specific to the missing key
-            error("Could not find frequency data in the output file")
+        if key not in d:
+            msg = f"Could not find frequency data in the output file, missing key '{key}'"
+            error(msg)
+    # TODO: We should return a custom dataclass instead of full cclib dictionary
+    return d
 
 def main():
     """Entry point to the CLI app"""
