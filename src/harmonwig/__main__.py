@@ -5,6 +5,9 @@ Authors:
     * Daniel Hollas <daniel.hollas@bristol.ac.uk>
 """
 
+from .harmonwig import HarmonicWigner
+
+
 def parse_cmd():
     import argparse
 
@@ -36,12 +39,14 @@ def parse_cmd():
         help="Low-frequency threshold",
     )
 
+    """
     parser.add_argument(
         "--file-format",
         dest="file_fmt",
         default="auto",
         help="Format of the output file",
     )
+    """
 
     parser.add_argument(
         "-o",
@@ -60,11 +65,13 @@ def error(msg: str):
     sys.exit(1)
 
 
-def read_qm_output(fname: str, fmt: str = "auto") -> dict:
+def read_qm_output(fname: str) -> dict:
     from pathlib import Path
 
     from cclib.io import ccread
 
+    # TODO: Determine the QM program and have an allowlist
+    # of known-to-work programgs
     path = Path(fname)
     try:
         with path.open("r") as f:
@@ -73,7 +80,7 @@ def read_qm_output(fname: str, fmt: str = "auto") -> dict:
         error(str(e))
 
     if parsed_obj is None:
-        error("Could not read ORCA output")
+        error("Could not read QM output file")
     return parsed_obj.getattributes()
 
 
@@ -91,7 +98,7 @@ def main():
 
     opts = parse_cmd()
 
-    out = read_qm_output(opts.input_file, fmt=opts.file_fmt)
+    out = read_qm_output(opts.input_file)
 
     import ase
     from tqdm import tqdm
@@ -107,7 +114,7 @@ def main():
     print("Atom masses:")
     print(out["atommasses"])
 
-    wigner = Wigner(
+    wigner = HarmonicWigner(
         ase_mol,
         out["vibfreqs"],
         out["vibdisps"],
