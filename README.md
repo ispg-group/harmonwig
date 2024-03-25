@@ -2,8 +2,12 @@
 
 [![Actions Status][actions-badge]][actions-link]
 [![PyPI version][pypi-version]][pypi-link]
-[![Conda-Forge][conda-badge]][conda-link]
-[![PyPI platforms][pypi-platforms]][pypi-link]
+
+Python package for Wigner sampling of harmonic vibrational wavefunction of molecules. 
+
+** ⚠️ WARNING: This package is work in progress. Once it becomes usable, it will be available as a Python package on PyPI :warning: **
+
+
 
 <!-- prettier-ignore-start -->
 [actions-badge]:            https://github.com/ispg-group/harmonwig/workflows/CI/badge.svg
