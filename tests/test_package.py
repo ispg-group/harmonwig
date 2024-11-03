@@ -1,5 +1,6 @@
 import harmonwig
 
 
-def test_dummy():
-    print(harmonwig.__version__)
+def test_version():
+    """Test the presense of `__version__` attribute"""
+    print(f"harmonwig version: {harmonwig.__version__}")
