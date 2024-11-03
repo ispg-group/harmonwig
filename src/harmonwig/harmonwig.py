@@ -72,7 +72,7 @@ class HarmonicWigner:
             sigma = math.sqrt(0.5)
             freq_factor = math.sqrt(mode["freq"])
 
-            Q = random.gauss(mu=0.0, sigma=sigma)
+            Q = self.rnd.gauss(mu=0.0, sigma=sigma)
             Q /= freq_factor
             # TODO: Sample momenta as well, attach them to ASE object as velocities
             # P = random.gauss(mu=0.0, sigma=sigma)
