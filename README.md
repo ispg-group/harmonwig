@@ -21,21 +21,21 @@ be available as a Python package on PyPI :warning: **
 
 ## Installation
 
-Harmonwig is a simple Python CLI application, but it does rely on some other
-Python libraries that needs to be installed together. Currently, the package is
-not yet available on PyPI, but it can still be installed directly from GitHub.
-We recommend using `pipx`, which automatically creates an isolated Python
-environment and makes harmonwig available globally.
+Harmonwig is a simple Python CLI application, but it does rely on a handful of
+other Python libraries that needs to be installed together. Currently, the
+package is not yet available on PyPI, but it can still be installed directly
+from GitHub. We recommend using `uv`, which automatically creates an isolated
+Python environment and makes harmonwig available globally.
 
 ```console
-$ pip install pipx
-$ pipx install "harmonwig @ git+https://github.com/ispg-group/harmonwig.git"
+$ pip install uv
+$ uv tool install "harmonwig @ git+https://github.com/ispg-group/harmonwig.git"
 ```
 
 To upgrade harmonwig to the latest version run:
 
 ```console
-pipx upgrade harmonwig
+uv tool upgrade harmonwig
 ```
 
 ## Usage
