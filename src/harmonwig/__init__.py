@@ -11,4 +11,4 @@ from .harmonwig import HarmonicWigner
 __version__ = "0.1.0a0"
 
 # TODO: Expose more interface?
-__all__ = ["__version__", "HarmonicWigner"]
+__all__ = ["HarmonicWigner", "__version__"]
