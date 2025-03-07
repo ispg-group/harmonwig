@@ -17,7 +17,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.8.6"
+    rev: "v0.9.9"
     hooks:
       - id: ruff
         args: ["--fix", "--exit-non-zero-on-fix", "--show-fixes"]
@@ -30,6 +30,6 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.30.0"
+    rev: "0.31.2"
     hooks:
       - id: check-github-workflows
