@@ -5,12 +5,14 @@ Authors:
     * Daniel Hollas <daniel.hollas@bristol.ac.uk>
 """
 
+import argparse
+import sys
+from pathlib import Path
+
 from .harmonwig import HarmonicWigner
 
 
 def parse_cmd():
-    import argparse
-
     desc = "Program for harmonic Wigner sampling"
     prog = "harmonwig"
     parser = argparse.ArgumentParser(description=desc, prog=prog)
@@ -59,53 +61,44 @@ def parse_cmd():
     return parser.parse_args()
 
 
-def error(msg: str):
-    import sys
-
-    print(f"ERROR: {msg}")
-    sys.exit(1)
-
-
-def read_qm_output(fname: str) -> dict:
-    from pathlib import Path
-
+def read_qm_output(path: Path) -> dict:
     from cclib.io import ccread
 
     # TODO: Determine the QM program and have an allowlist
     # of known-to-work programgs
-    path = Path(fname)
-    try:
-        with path.open("r") as f:
-            parsed_obj = ccread(f)
-    except FileNotFoundError as e:
-        error(str(e))
+    with path.open("r") as f:
+        parsed_obj = ccread(f)
 
     if parsed_obj is None:
-        error("Could not read QM output file")
+        sys.exit("ERROR: Could not read QM output file")
     return validate(parsed_obj)
 
 
 def validate(parsed_obj) -> dict:
     d = parsed_obj.getattributes()
     if not d["optdone"]:
-        error("Geometry optimization did not finish!")
+        sys.exit("ERROR: Geometry optimization did not finish!")
     req_keys = ["atomcoords", "atommasses", "vibdisps", "vibfreqs"]
     for key in req_keys:
         if key not in d:
             msg = f"Incomplete frequency data in the output file, missing key '{key}'"
-            error(msg)
+            sys.exit(f"ERROR: {msg}")
     # TODO: We should return a custom dataclass instead of full cclib dictionary
     return d
 
 
 def main():
     """Entry point to the CLI app"""
-
     opts = parse_cmd()
 
-    out = read_qm_output(opts.input_file)
+    input_file = Path(opts.input_file)
+    if not input_file.is_file():
+        sys.exit(f"ERROR: File '{opts.input_file}' does not exist")
+
+    out = read_qm_output(input_file)
 
     import ase
+    import ase.io
     from tqdm import tqdm
 
     # We assume that the last coordinates are the optimized ones
