@@ -5,31 +5,31 @@ ci:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v5.0.0"
+    rev: "v6.0.0"
     hooks:
       - id: check-added-large-files
-
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v4.0.0-alpha.8"
-    hooks:
-      - id: prettier
-        types_or: [yaml, markdown]
-        args: [--prose-wrap=always]
+        exclude: uv.lock
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.11.7"
+    rev: "v0.14.1"
     hooks:
       - id: ruff
         args: ["--fix", "--exit-non-zero-on-fix", "--show-fixes"]
       - id: ruff-format
 
-  - repo: https://github.com/abravalheri/validate-pyproject
-    rev: "v0.24.1"
-    hooks:
-      - id: validate-pyproject
-        additional_dependencies: ["validate-pyproject-schema-store[all]"]
-
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.33.0"
+    rev: "0.34.1"
     hooks:
       - id: check-github-workflows
+
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.15.0
+    hooks:
+      - id: pretty-format-yaml
+        args: [--autofix, --offset, '2', --preserve-quotes]
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.9.4
+    hooks:
+      # Check and update the uv lockfile
+      - id: uv-lock
