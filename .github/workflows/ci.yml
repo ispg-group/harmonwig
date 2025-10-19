@@ -31,7 +31,6 @@ jobs:
           version: 0.9.4
           python-version: ${{ matrix.python-version }}
           activate-environment: true
-          cache-python: true
 
       - name: Test package
         run: uv run pytest --cov --cov-report=xml --cov-report=term
