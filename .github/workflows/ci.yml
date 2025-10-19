@@ -25,9 +25,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
       - name: Set up uv
         uses: astral-sh/setup-uv@v6
         with:
+          version: 0.9.4
           python-version: ${{ matrix.python-version }}
           activate-environment: true
 
