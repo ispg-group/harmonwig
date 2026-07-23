@@ -11,25 +11,30 @@ repos:
         exclude: uv.lock
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.14.1"
+    rev: "v0.16.0"
     hooks:
       - id: ruff
         args: ["--fix", "--exit-non-zero-on-fix", "--show-fixes"]
       - id: ruff-format
 
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: v0.0.63
+    hooks:
+      - id: ty
+
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.34.1"
+    rev: "0.37.4"
     hooks:
       - id: check-github-workflows
 
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.15.0
+    rev: v2.16.0
     hooks:
       - id: pretty-format-yaml
         args: [--autofix, --offset, '2', --preserve-quotes]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.9.4
+    rev: 0.11.31
     hooks:
       # Check and update the uv lockfile
       - id: uv-lock
